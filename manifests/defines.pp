@@ -6,9 +6,9 @@ define modprobe::kern_module(
 ){
 
     # chosse and load default file
-    $modulesfile = $operatingsystem ? { 
-        debian => "/etc/modules", 
-        redhat => "/etc/rc.modules" 
+    case $operatingsystem {
+        debian: { $modulesfile = '/etc/modules' }
+        default: { $modulesfile = '/etc/rc.modules' }
     }
     include modprobe::loadfile
 
