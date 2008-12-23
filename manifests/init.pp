@@ -11,7 +11,7 @@
 # the Free Software Foundation.
 #
 
-# modules_dir { "modprobe": }
+import 'defines.pp'
 
 class modprobe {
     file{"/etc/modprobe.conf":
