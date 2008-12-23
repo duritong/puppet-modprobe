@@ -1,7 +1,7 @@
 # manifest/defines.pp
 # taken from: http://reductivelabs.com/trac/puppet/wiki/Recipes/KernelModules
 
-define kern_module(
+define modprobe::kern_module(
     $ensure = 'present'
 ){
 
