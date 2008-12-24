@@ -16,12 +16,13 @@ define modprobe::kern_module(
         present: {
             exec{"insert_module_${name}":
                 command => "/bin/echo '/sbin/modprobe ${name}' >> '${modulesfile}' ",
-                unless => "/bin/grep -qFx '${name}' '${modulesfile}'"
+                unless => "/bin/grep -qFx '/sbin/modprobe ${name}' '${modulesfile}'"
             }
             case $operatingsystem {
                 debian,ubuntu: {
                     Exec["insert_module_${name}"]{
                         command => "/bin/echo '${name}' >> '${modulesfile}'",
+                        unless => "/bin/grep -qFx '${name}' '${modulesfile}'"
                     }
                 }
             }
