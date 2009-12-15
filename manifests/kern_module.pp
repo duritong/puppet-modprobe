@@ -6,10 +6,14 @@ define modprobe::kern_module(
 ){
     include modprobe::modulesfile
     case $operatingsystem {
-        debian,ubtunu: {
+        debian,ubuntu: {
+            $modulesfile = '/etc/modules'
             File['/etc/rc.module']{
                 path => '/etc/modules',
             }
+        }
+        default: {
+            $modulesfile = '/etc/rc.modules'
         }
     }
     case $ensure {
