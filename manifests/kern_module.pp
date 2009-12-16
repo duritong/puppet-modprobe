@@ -1,20 +1,10 @@
-# manifest/defines.pp
-# taken from: http://reductivelabs.com/trac/puppet/wiki/Recipes/KernelModules
-
 define modprobe::kern_module(
     $ensure = 'present'
 ){
     include modprobe::modulesfile
     case $operatingsystem {
-        debian,ubuntu: {
-            $modulesfile = '/etc/modules'
-            File['/etc/rc.module']{
-                path => '/etc/modules',
-            }
-        }
-        default: {
-            $modulesfile = '/etc/rc.modules'
-        }
+        debian,ubuntu: { $modulesfile = '/etc/modules' }
+        default: { $modulesfile = '/etc/rc.modules' }
     }
     case $ensure {
         present: {
