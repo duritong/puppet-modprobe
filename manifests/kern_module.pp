@@ -1,7 +1,6 @@
 define modprobe::kern_module(
     $ensure = 'present'
 ){
-    include modprobe::modulesfile
     case $operatingsystem {
         debian,ubuntu: { $modulesfile = '/etc/modules' }
         default: { $modulesfile = '/etc/rc.modules' }
