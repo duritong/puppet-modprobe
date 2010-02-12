@@ -2,8 +2,12 @@ define modprobe::kern_module(
     $ensure = 'present'
 ){
     case $operatingsystem {
-        debian,ubuntu: { $modulesfile = '/etc/modules' }
-        default: { $modulesfile = '/etc/rc.modules' }
+        debian,ubuntu: {
+            $modulesfile = '/etc/modules'
+        }
+        default: {
+            $modulesfile = '/etc/rc.modules'
+        }
     }
     case $ensure {
         present: {
