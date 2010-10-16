@@ -2,12 +2,12 @@ define modprobe::kern_module(
   $ensure = 'present'
 ){
   line{"module_${name}":
-    line => $operatingsystem {
+    line => $operatingsystem ? {
       debian => $name,
       ubuntu => $name,
       default => "/sbin/modprobe $name"
     },
-    file => $operatingsystem {
+    file => $operatingsystem ? {
       debian => '/etc/modules',
       ubuntu => '/etc/modules',
       default => '/etc/rc.modules'
