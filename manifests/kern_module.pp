@@ -1,13 +1,13 @@
 define modprobe::kern_module(
   $ensure = 'present'
 ){
-  line{"module_${name}":
-    line => $operatingsystem ? {
+  file_line{"module_${name}":
+    line => $::operatingsystem ? {
       debian => $name,
       ubuntu => $name,
       default => "/sbin/modprobe $name"
     },
-    file => $operatingsystem ? {
+    path => $::operatingsystem ? {
       debian => '/etc/modules',
       ubuntu => '/etc/modules',
       default => '/etc/rc.modules'
@@ -16,13 +16,13 @@ define modprobe::kern_module(
   }
   case $ensure {
     present: {
-      exec{"/sbin/modprobe $name":
-        unless => "/bin/grep -q '^$name ' /proc/modules" 
+      exec{"/sbin/modprobe ${name}":
+        unless => "/bin/grep -q '^${name} ' /proc/modules" 
       }
     }
     absent: {
-      exec{"/sbin/modprobe -r $name":
-        onlyif => "/bin/grep -q '^$name ' /proc/modules"
+      exec{"/sbin/modprobe -r ${name}":
+        onlyif => "/bin/grep -q '^${name} ' /proc/modules"
       }
     }
     default: {

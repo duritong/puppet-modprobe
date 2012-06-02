@@ -14,12 +14,12 @@
 class modprobe {
   file{'/etc/modprobe.conf':
     source => [
-      "puppet:///modules/site-modprobe/$fqdn/modprobe.conf",
-      "puppet:///modules/site-modprobe/$virtual/modprobe.conf",
-      "puppet:///modules/site-modprobe/$operatingsystem/modprobe.conf",
-      "puppet:///modules/site-modprobe/modprobe.conf",
-      "puppet:///modules/modprobe/$virtual/modprobe.conf",
-      "puppet:///modules/modprobe/$operatingsystem/modprobe.conf",
+      "puppet:///modules/site_modprobe/${::fqdn}/modprobe.conf",
+      "puppet:///modules/site_modprobe/${::virtual}/modprobe.conf",
+      "puppet:///modules/site_modprobe/${::operatingsystem}/modprobe.conf",
+      "puppet:///modules/site_modprobe/modprobe.conf",
+      "puppet:///modules/modprobe/${::virtual}/modprobe.conf",
+      "puppet:///modules/modprobe/${::operatingsystem}/modprobe.conf",
       "puppet:///modules/modprobe/modprobe.conf",
     ],
     owner => root, group => 0, mode => 0644;
