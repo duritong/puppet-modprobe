@@ -22,6 +22,8 @@ class modprobe {
       "puppet:///modules/modprobe/${::operatingsystem}/modprobe.conf",
       "puppet:///modules/modprobe/modprobe.conf",
     ],
-    owner => root, group => 0, mode => 0644;
+    owner => root,
+    group => 0,
+    mode  => '0644';
   }
 }

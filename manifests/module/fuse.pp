@@ -1,8 +1,12 @@
 class modprobe::module::fuse {
-  package{'fuse-utils':
-    ensure => present,
+  if $osfamily == 'RedHat' {
+    $pkg_name = 'fuse'
+  } else {
+    $pkg_name = 'fuse-utils'
   }
-  modprobe::kern_module{'fuse':
+  package{$pkg_name:
+    ensure => present,
+  } -> modprobe::kern_module{'fuse':
     ensure => present,
   }
 }
